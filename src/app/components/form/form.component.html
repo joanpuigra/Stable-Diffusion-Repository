@@ -1,0 +1,114 @@
+<!-- Title -->
+<div class="prose flex flex-col items-center max-w-full">
+    <h1 class="text-primary text-5xl mt-4 mb-2">
+        Add new Stable Diffusion Model
+    </h1>
+    <h2 class="text-secondary text-3xl mt-0 mb-4">
+        Complete this form to add a new model on the site
+    </h2>
+
+    <!-- Form -->
+    <div class="text-write bg-secondary/70 shadow-2xl w-8/12
+                     px-4 mb-8 p-4 rounded-box border-2 border-secondary-content/20">
+        <div class="flex flex-row justify-center items-center space-x-1.5 mb-2">
+            <input
+                    type="text"
+                    name="model_name"
+                    id="model_name"
+                    placeholder="Model name"
+                    class="input input-secondary focus:select-primary border-2 mb-2" required
+            />
+            <input
+                    type="text"
+                    name="description"
+                    id="description"
+                    placeholder="Description"
+                    class="input input-secondary focus:select-primary border-2 mb-2" required
+            />
+
+            <input
+                    type="text"
+                    name="author"
+                    id="author"
+                    placeholder="Author"
+                    class="input input-secondary focus:select-primary border-2 mb-2" required
+            />
+        </div>
+
+        <div class="flex flex-row justify-center items-center space-x-5 mb-2">
+            <select class="select select-secondary focus:select-primary border-2 text-write w-full max-w-xs mb-2">
+                <option disabled selected>Select model type</option>
+                <option>Checkpoint</option>
+                <option>Embedding</option>
+                <option>Hypernetwork</option>
+                <option>Aesthetic Gradient</option>
+                <option>LoRa</option>
+                <option>LyCORIS</option>
+                <option>DoRa</option>
+                <option>Controlnet</option>
+                <option>Upscaler</option>
+                <option>Motion</option>
+                <option>VAE</option>
+                <option>Poses</option>
+                <option>Wildcards</option>
+                <option>Workflows</option>
+            </select>
+
+            <select class="select select-secondary focus:select-primary border-2 text-write w-full max-w-xs mb-2">
+                <option disabled selected>Select base model</option>
+                <option>SD 1.5</option>
+                <option>SD 2.0</option>
+                <option>SDXL 1.0</option>
+                <option>Pony</option>
+                <option>PixArt A</option>
+            </select>
+        </div>
+
+        <div class="flex flex-col justify-center items-center form-control space-x-1.5 mb-4">
+            <p>Select your <b>choices</b> regarding the <b>license</b> of the model</p>
+
+            <div class="flex flex-row">
+                <label class="cursor-pointer label">
+                    <span class="label-text text-write mr-2">Credit</span>
+                    <input type="checkbox" checked="checked" class="checkbox checkbox-primary"/>
+                </label>
+                <label class="cursor-pointer label">
+                    <span class="label-text text-write mr-2">Selling images</span>
+                    <input type="checkbox" checked="checked" class="checkbox checkbox-primary"/>
+                </label>
+                <label class="cursor-pointer label">
+                    <span class="label-text text-write mr-2">Generation services</span>
+                    <input type="checkbox" checked="checked" class="checkbox checkbox-primary"/>
+                </label>
+                <label class="cursor-pointer label">
+                    <span class="label-text text-write mr-2">Selling model</span>
+                    <input type="checkbox" checked="checked" class="checkbox checkbox-primary"/>
+                </label>
+            </div>
+        </div>
+
+        <div class="flex flex-col justify-center items-center mb-2">
+            <input
+                    type="file"
+                    class="file-input file-input-bordered file-input-secondary
+                 w-full max-w-xs mb-4 text-write"
+                    placeholder="Upload model"
+                    required
+                    accept=".zip, .rar, .7z, .tar.gz, .tar.bz2, .tar.xz, .tar"
+                    name="model_file"
+                    id="model_file"
+            />
+            <input
+                    type="file"
+                    class="file-input file-input-bordered file-input-secondary
+                 w-full max-w-xs mb-4 text-write"
+                    placeholder="Add preview image"
+                    required
+                    accept=".png, .jpg, .jpeg, .webp, .svg"
+                    name="model_file"
+                    id="image_file"
+            />
+            <button class="btn font-bold">UPLOAD MODEL</button>
+        </div>
+    </div>
+</div>
