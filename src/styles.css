@@ -40,20 +40,26 @@
 
 @layer components {
     .btn {
-        @apply btn-secondary text-secondary-content/50
-        hover:text-secondary-content/60 border-0;
+        @apply btn-secondary text-secondary-content/50;
+        @apply hover:text-secondary-content/60 border-2;
+        @apply border-secondary-content/20 border-b-0;
     }
 
     .input {
-        @apply input-secondary text-secondary-content/50
-        hover:text-secondary-content/60 border-0;
+        @apply input-secondary text-secondary-content/50;
+        @apply hover:text-secondary-content/60 border-0;
+    }
+
+    .checkbox {
+        @apply checkbox-primary bg-primary-content/10;
+        @apply hover:bg-primary-content/20;
     }
 }
 
 @layer utilities {
     .text-write {
-        @apply text-secondary-content/50
-        hover:text-secondary-content/60;
+        @apply text-secondary-content/50;
+        @apply hover:text-secondary-content/60;
     }
 
     .no-prose {
