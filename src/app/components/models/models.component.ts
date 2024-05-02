@@ -9,6 +9,13 @@ import {RouterLink} from "@angular/router";
     styleUrl: './models.component.css'
 })
 
-export class ModelsComponent {
+export class ModelsComponent implements OnInit{
+    formData: any;
 
+    constructor(private formDataService: FormDataService) {}
+
+    ngOnInit(): void {
+        this.formData = this.formDataService.getData();
+        console.log(this.formData);
+    }
 }
