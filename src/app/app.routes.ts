@@ -1,8 +1,8 @@
 import {Routes} from '@angular/router';
-import {HomeComponent} from './components/home/home.component';
-import {ModelsComponent} from "./components/models/models.component";
-import {FormComponent} from "./components/form/form.component";
-import {SdComponent} from './components/sd/sd.component';
+import {HomeComponent} from './pages/home/home.component';
+import {ModelsComponent} from "./pages/models/models.component";
+import {FormComponent} from "./pages/form/form.component";
+import {SdComponent} from './pages/sd/sd.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent, pathMatch: 'full'},
