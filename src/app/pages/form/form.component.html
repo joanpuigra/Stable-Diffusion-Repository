@@ -22,7 +22,7 @@
                     <input
                             required
                             type="text"
-                            formControlName="modelName"
+                            formControlName="name"
                             placeholder="Model name"
                             class="input input-secondary focus:select-primary
                                 border-4 mb-2 border-secondary"
@@ -30,7 +30,7 @@
                     <!-- Model Description -->
                     <input
                             type="text"
-                            formControlName="modelDescription"
+                            formControlName="description"
                             placeholder="Description"
                             class="input input-secondary focus:select-primary
                                  border-4 mb-2 border-secondary"
@@ -38,7 +38,7 @@
                     <!-- Model Author -->
                     <input
                             type="text"
-                            formControlName="modelAuthor"
+                            formControlName="author"
                             placeholder="Author"
                             class="input input-secondary focus:select-primary
                                 border-4 mb-2 border-secondary"
@@ -52,7 +52,7 @@
                 >
                     <select
                             required
-                            formControlName="modelType"
+                            formControlName="type"
                             class="select select-secondary focus:select-primary
                                 border-4 border-secondary
                                 text-write w-full max-w-xs mb-2"
@@ -78,7 +78,7 @@
 
                     <select
                             required
-                            formControlName="modelBase"
+                            formControlName="base"
                             class="select select-secondary focus:select-primary
                                 border-4 border-secondary
                                 text-write w-full max-w-xs mb-2"
@@ -109,7 +109,7 @@
                         </p>
 
                         <div
-                                formArrayName="modelLicense"
+                                formArrayName="license"
                                 class="flex flex-row"
                         >
                             <label class="cursor-pointer label">
@@ -220,7 +220,7 @@
             <div class="flex flex-row justify-center items-center">
                 <button
                         type="submit" [disabled]="!form.valid"
-                        class="btn bg-accent font-bold text-success
+                        class="btn btn-accent bg-accent font-bold text-success text-5xl
                             border-b-2 border-success hover:text-accent
                             hover:bg-success hover:border-accent"
                 >
@@ -229,30 +229,12 @@
             </div>
 
             @if (form.invalid) {
-                <div class="alert alert-error mt-4">
-                    <div class="flex-1">
-                        <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                        >
-                            <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12"
-                            />
-                        </svg>
-                    </div>
-
-                    <div class="flex-1">
-                        <p>
-                            Please fill all the required fields before
-                            submitting the form
-                        </p>
-                    </div>
+                <div
+                        class="flex alert alert-error mt-4
+                            text-white font-bold text-5xl
+                            justify-center items-center"
+                >
+                    <p>Invalid form data, check for any errors</p>
                 </div>
             }
         </form>

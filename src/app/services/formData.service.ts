@@ -1,21 +1,19 @@
 import {Injectable, signal} from '@angular/core';
-import {sdModelInterface} from "./sdModel.interface";
+import {modelsInterface} from "../pages/models/models.interface";
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class FormDataService {
-    formData = signal<sdModelInterface[]>([]);
+    private formData = signal<modelsInterface[]>([]);
 
     submitData = (formData: any) => {
-        console.log('Data from form: ', formData);
         this.formData.set(formData);
-        console.log('Data from signal: ', formData);
     };
 
     getData = () => {
-        console.log('Form data retrieved: ', this.formData.name);
-        return this.formData.asReadonly();
+        console.log('Data from get: ', this.formData());
+        return this.formData();
     }
 }

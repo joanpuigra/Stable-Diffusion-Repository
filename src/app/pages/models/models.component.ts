@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormDataService} from '../../services/formData.service';
 import {RouterLink} from "@angular/router";
 
 @Component({
@@ -9,7 +10,7 @@ import {RouterLink} from "@angular/router";
     styleUrl: './models.component.css'
 })
 
-export class ModelsComponent implements OnInit{
+export class ModelsComponent implements OnInit {
     formData: any;
 
     constructor(private formDataService: FormDataService) {}

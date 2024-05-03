@@ -1,12 +1,13 @@
 import {Component} from "@angular/core";
 import {RouterLink} from "@angular/router";
 import {
-    FormArray,
     FormBuilder,
     FormGroup,
     ReactiveFormsModule,
     Validators
 } from "@angular/forms";
+import {FormDataService} from "../../services/formData.service";
+import {modelsInterface} from "../models/models.interface";
 
 @Component({
     selector: 'app-form',
@@ -18,47 +19,50 @@ import {
 
 export class FormComponent {
     form: FormGroup;
+    selectedFile: File | null = null;
+    selectedImg: File | null = null;
 
-    constructor(private fb: FormBuilder) {
+    constructor(
+        private fb: FormBuilder,
+        private formDataService: FormDataService,
+    ) {
         this.form = this.fb.group({
-            modelName: ['', Validators.required],
-            modelDescription: ['', [
+            name: ['', Validators.required],
+            description: ['', [
                 Validators.minLength(5),
-                Validators.maxLength(20)
+                Validators.maxLength(20),
             ]],
-            modelAuthor: [''],
-            modelType: [null, Validators.required],
-            modelBase: [null, Validators.required],
-            modelLicense: this.fb.array([
-                this.fb.control(false),
-                this.fb.control(false),
-                this.fb.control(false),
-                this.fb.control(false),
-            ]),
+            author: [''],
+            type: [null, Validators.required],
+            base: [null, Validators.required],
+            license: this.fb.array([false, false, false, false]),
         });
-    }
-
-    get modelLicense() {
-        return this.form.get('modelLicense') as FormArray;
-    }
-
-    addLicense = () => {
-        this.modelLicense.push(new FormGroup(false));
     };
+
+
+    // get modelLicense() {
+    //     return this.form.get('modelLicense') as FormArray;
+    // }
+    //
+    // addLicense = () => {
+    //     this.modelLicense.push(this.fb.control(false));
+    // };
 
     onSubmit() {
         if (this.form.valid) {
-            console.log('Form submitted');
-            console.log(this.form.value);
-            console.log(this.selectedFile);
-            console.log(this.selectedImg);
+            const formData: modelsInterface = {
+                ...this.form.value,
+                file: this.selectedFile,
+                img: this.selectedImg,
+            };
+
+            // Send form data to the service
+            this.formDataService.submitData(formData);
+            console.log('Data submitted')
         } else {
-            console.log('Form invalid');
+            console.error('Invalid form data. Please check the form fields');
         }
     }
-
-    selectedFile: File | null = null;
-    selectedImg: File | null = null;
 
     onFileSelected(event: Event) {
         const file = (event.target as HTMLInputElement).files;
@@ -68,7 +72,7 @@ export class FormComponent {
             // Validate file size
             const maxFileSize = 1024 * 1024 * 10; // 10MB
             if (selectedFile.size > maxFileSize) {
-                console.log('File size too large');
+                alert(`File size too large (${selectedFile.size} bytes`);
                 return;
             }
 
@@ -84,12 +88,16 @@ export class FormComponent {
             ];
 
             if (!allowedFileTypes.includes(selectedFile.type)) {
-                alert('Invalid file type. Only .zip, .rar, .7z, .tar.gz, .tar.bz2, .tar.xz, .tar files are allowed');
+                alert(
+                    'Invalid file type. Only .zip, .rar, .7z, ' +
+                    '.tar.gz, .tar.bz2, .tar.xz, .tar files are allowed'
+                );
                 return;
             }
             this.selectedFile = selectedFile;
         }
     }
+
     onImgSelected(event: Event) {
         const img = (event.target as HTMLInputElement).files;
         if (img) {
@@ -98,7 +106,7 @@ export class FormComponent {
             // Validate file size
             const maxImgSize = 1024 * 1024 * 10; // 10MB
             if (selectedImg.size > maxImgSize) {
-                console.log('File size too large');
+                alert(`File size too large (${selectedImg.size} bytes`);
                 return;
             }
 
@@ -111,7 +119,10 @@ export class FormComponent {
             ];
 
             if (!allowedImgTypes.includes(selectedImg.type)) {
-                alert('Invalid file type. Only .zip, .rar, .7z, .tar.gz, .tar.bz2, .tar.xz, .tar files are allowed');
+                alert(
+                    'Invalid file type. Only .png, .jpeg, ' +
+                    '.webp, .svg files are allowed'
+                );
                 return;
             }
             this.selectedImg = selectedImg;

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import {HomeComponent} from
-      "./components/home/home.component";
+        "./pages/home/home.component";
 import {HeaderComponent} from
       "./components/header/header.component";
 import {NavbarComponent} from

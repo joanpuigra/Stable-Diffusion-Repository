@@ -1,4 +1,4 @@
-export interface sdModelInterface {
+export interface modelsInterface {
     name: string,
     description: string,
     author: string,
