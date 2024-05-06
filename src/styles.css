@@ -51,8 +51,9 @@
     }
 
     .checkbox {
-        @apply checkbox-primary bg-primary-content/10;
-        @apply hover:bg-primary-content/20;
+        @apply checkbox-accent bg-accent hover:bg-success;
+        @apply border-2 border-success;
+        @apply checked:bg-success checked:border-success;
     }
 }
 

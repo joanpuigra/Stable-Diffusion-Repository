@@ -1,19 +1,20 @@
-import {Injectable, signal} from '@angular/core';
-import {modelsInterface} from "../pages/models/models.interface";
+import { Injectable, signal } from "@angular/core";
+import { modelsInterface } from "../pages/models/models.interface";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: "root",
 })
-
 export class FormDataService {
-    private formData = signal<modelsInterface[]>([]);
+  private formData = signal<modelsInterface[]>([]);
 
-    submitData = (formData: any) => {
-        this.formData.set(formData);
-    };
+  submitData = (formData: modelsInterface) => {
+    const currentData = this.formData();
+    currentData.push(formData);
+    formData.license = formData.license.filter((value) => value);
+    this.formData.set(currentData);
+  };
 
-    getData = () => {
-        console.log('Data from get: ', this.formData());
-        return this.formData();
-    }
+  getData = () => {
+    return this.formData();
+  };
 }
