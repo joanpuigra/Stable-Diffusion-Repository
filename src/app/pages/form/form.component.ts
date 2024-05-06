@@ -1,6 +1,11 @@
 import { ChangeDetectorRef, Component } from "@angular/core";
 import { RouterLink } from "@angular/router";
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from "@angular/forms";
 import { FormDataService } from "../../services/formData.service";
 import { modelsInterface } from "../models/models.interface";
 
@@ -20,13 +25,13 @@ export class FormComponent {
     "Credit",
     "Selling images",
     "Generation services",
-    "Selling model,
+    "Selling model",
   ];
 
   constructor(
     private fb: FormBuilder,
     private formDataService: FormDataService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
   ) {
     this.form = this.fb.group({
       name: ["", Validators.required],
@@ -34,7 +39,7 @@ export class FormComponent {
       author: [""],
       type: [null, Validators.required],
       base: [null, Validators.required],
-      license: this.fb.array([false, false, false, false])
+      license: this.fb.array([false, false, false, false]),
     });
   }
 
@@ -44,7 +49,7 @@ export class FormComponent {
         ...this.form.value,
         license: this.getLicenseText(),
         file: this.selectedFile,
-        img: this.selectedImg
+        img: this.selectedImg,
       };
 
       // Send form data to the service
@@ -91,13 +96,13 @@ export class FormComponent {
         "application/gzip",
         "application/x-bzip2",
         "application/x-xz",
-        "application/x-tar"
+        "application/x-tar",
       ];
 
       if (!allowedFileTypes.includes(selectedFile.type)) {
         alert(
           "Invalid file type. Only .zip, .rar, .7z, " +
-            ".tar.gz, .tar.bz2, .tar.xz, .tar files are allowed"
+            ".tar.gz, .tar.bz2, .tar.xz, .tar files are allowed",
         );
         return;
       }
@@ -122,13 +127,13 @@ export class FormComponent {
         "image/png",
         "image/jpeg",
         "image/webp",
-        "image/svg+xml"
+        "image/svg+xml",
       ];
 
       if (!allowedImgTypes.includes(selectedImg.type)) {
         alert(
           "Invalid file type. Only .png, .jpeg, " +
-            ".webp, .svg files are allowed"
+            ".webp, .svg files are allowed",
         );
         return;
       }

@@ -8,7 +8,7 @@
   <div>
     <div
       *ngIf="formData && formData.length > 0"
-      class="text-write w-8/12 p-4 bg-primary border-2 border-accent"
+      class="text-write w-8/12 p-4 bg-primary border-2 border-primary-content/20 rounded-box shadow-2xl flex flex-col items-center gap-4"
     >
       <div *ngFor="let data of formData">
         <img alt="" src="assets/{{ data.img.name }}" />
@@ -24,7 +24,7 @@
         <p><b>Type:</b>{{ data.file.type }}</p>
         <p>
           <a class="text-success underline" href="assets/{{ data.file.name }}"
-          >Download</a
+            >Download</a
           >
         </p>
       </div>
