@@ -1,243 +1,208 @@
-<div class="prose flex flex-col items-center max-w-full">
-    <!-- region Title -->
-    <h1 class="text-primary text-5xl mt-4 mb-2">
-        Add new Stable Diffusion Model
-    </h1>
-    <h2 class="text-secondary text-3xl mt-0 mb-4">
-        Complete this form to add a new model on the site
-    </h2>
-    <!-- endregion Title -->
+<div class="prose flex flex-col justify-center items-center max-w-full">
+  <!-- region Title -->
+  <h1 class="text-primary text-5xl mt-4 mb-2">
+    Add new Stable Diffusion Model
+  </h1>
+  <h2 class="text-secondary text-3xl mt-0 mb-4">
+    Complete this form to add a new model on the site
+  </h2>
+  <!-- endregion -->
 
-    <!-- region Form -->
-    <div class="text-write w-8/12 p-4 bg-base-100">
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <div class="border-2 border-secondary-content/20
-                p-4 rounded-box bg-secondary/70"
-            >
-                <!-- region Model Data -->
-                <div class="flex flex-row justify-center items-center
-                    space-x-1.5 mb-2"
-                >
-                    <!-- Model name -->
-                    <input
-                            required
-                            type="text"
-                            formControlName="name"
-                            placeholder="Model name"
-                            class="input input-secondary focus:select-primary
-                                border-4 mb-2 border-secondary"
-                    />
-                    <!-- Model Description -->
-                    <input
-                            type="text"
-                            formControlName="description"
-                            placeholder="Description"
-                            class="input input-secondary focus:select-primary
-                                 border-4 mb-2 border-secondary"
-                    />
-                    <!-- Model Author -->
-                    <input
-                            type="text"
-                            formControlName="author"
-                            placeholder="Author"
-                            class="input input-secondary focus:select-primary
-                                border-4 mb-2 border-secondary"
-                    />
-                </div>
-                <!-- endregion -->
+  <!-- region Form -->
+  <div class="text-write w-8/12 p-4 bg-base-100">
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+      <div
+        class="border-2 border-secondary-content/20 p-4 rounded-box bg-secondary/70 shadow-2xl"
+      >
+        <!-- region Model Data -->
+        <div class="flex flex-row justify-center items-center space-x-1.5 mb-2">
+          <!-- Model name -->
+          <input
+            [class.border-error]="form.get('name')?.invalid"
+            [class.focus:select-error]="form.get('name')?.invalid"
+            [class.placeholder-error]="form.get('name')?.invalid"
+            [placeholder]="
+              form.get('name')?.invalid ? 'Name is required' : 'Model name'
+            "
+            class="input input-secondary focus:select-primary border-4 mb-2 border-secondary"
+            formControlName="name"
+            required
+            type="text"
+          />
 
-                <!-- region Select Models -->
-                <div class="flex flex-row justify-center items-center
-                    space-x-5 mb-2"
-                >
-                    <select
-                            required
-                            formControlName="type"
-                            class="select select-secondary focus:select-primary
-                                border-4 border-secondary
-                                text-write w-full max-w-xs mb-2"
-                    >
-                        <option disabled [value]="null">
-                            Select model type
-                        </option>
-                        <option>Checkpoint</option>
-                        <option>Embedding</option>
-                        <option>Hypernetwork</option>
-                        <option>Aesthetic Gradient</option>
-                        <option>LoRa</option>
-                        <option>LyCORIS</option>
-                        <option>DoRa</option>
-                        <option>Controlnet</option>
-                        <option>Upscaler</option>
-                        <option>Motion</option>
-                        <option>VAE</option>
-                        <option>Poses</option>
-                        <option>Wildcards</option>
-                        <option>Workflows</option>
-                    </select>
+          <!-- Model Description -->
+          <input
+            [class.border-error]="form.get('description')?.invalid"
+            [class.focus:select-error]="form.get('description')?.invalid"
+            [class.placeholder-error]="form.get('description')?.invalid"
+            class="input input-secondary focus:select-primary border-4 mb-2 border-secondary"
+            formControlName="description"
+            placeholder="Description: min 5, max 20"
+            type="text"
+          />
+          <!-- Model Author -->
+          <input
+            class="input input-secondary focus:select-primary border-4 mb-2 border-secondary"
+            formControlName="author"
+            placeholder="Author"
+            type="text"
+          />
+        </div>
+        <!-- endregion -->
 
-                    <select
-                            required
-                            formControlName="base"
-                            class="select select-secondary focus:select-primary
-                                border-4 border-secondary
-                                text-write w-full max-w-xs mb-2"
-                    >
-                        <option disabled [value]="null">
-                            Select base model
-                        </option>
-                        <option>SD 1.5</option>
-                        <option>SD 2.0</option>
-                        <option>SDXL 1.0</option>
-                        <option>Pony</option>
-                        <option>PixArt A</option>
-                    </select>
-                </div>
-                <!-- endregion -->
+        <!-- region Select Models -->
+        <div class="flex flex-row justify-center items-center space-x-5 mb-2">
+          <select
+            [class.border-error]="form.get('type')?.invalid"
+            class="select select-secondary focus:select-primary border-4 border-secondary text-write w-full max-w-xs mb-2"
+            formControlName="type"
+            required
+          >
+            <option [value]="null" disabled>Select model type</option>
+            <option>Checkpoint</option>
+            <option>Embedding</option>
+            <option>Hypernetwork</option>
+            <option>Aesthetic Gradient</option>
+            <option>LoRa</option>
+            <option>LyCORIS</option>
+            <option>DoRa</option>
+            <option>Controlnet</option>
+            <option>Upscaler</option>
+            <option>Motion</option>
+            <option>VAE</option>
+            <option>Poses</option>
+            <option>Wildcards</option>
+            <option>Workflows</option>
+          </select>
 
-                <!-- region Checkbox Models -->
-                <div class="flex flex-col justify-center items-center
-                    form-control space-x-1.5 mb-4"
-                >
-                    <div class="flex flex-col justify-center items-center p-4
-                        border-2 rounded-box border-primary-content/20
-                        bg-primary"
-                    >
-                        <p>
-                            Select your <b>choices</b> regarding the
-                            <b>license</b> of the model
-                        </p>
+          <select
+            [class.border-error]="form.get('base')?.invalid"
+            class="select select-secondary focus:select-primary border-4 border-secondary text-write w-full max-w-xs mb-2"
+            formControlName="base"
+            required
+          >
+            <option [value]="null" disabled>Select base model</option>
+            <option>SD 1.5</option>
+            <option>SD 2.0</option>
+            <option>SDXL 1.0</option>
+            <option>Pony</option>
+            <option>PixArt A</option>
+          </select>
+        </div>
+        <!-- endregion -->
 
-                        <div
-                                formArrayName="license"
-                                class="flex flex-row"
-                        >
-                            <label class="cursor-pointer label">
-                                <span class="label-text mr-2 text-write font-bold">
-                                    Credit
-                                </span>
+        <!-- region Checkbox Models -->
+        <div
+          class="flex flex-col justify-center items-center form-control space-x-1.5 mb-4"
+        >
+          <div
+            class="flex flex-col justify-center items-center p-4 border-2 rounded-box border-primary-content/20 bg-primary"
+          >
+            <p>
+              Select your <b>choices</b> regarding the <b>license</b> of the
+              model
+            </p>
 
-                                <input
-                                        type="checkbox" [formControlName]="0"
-                                        class="checkbox"
-                                />
-                            </label>
+            <div class="flex flex-row" formArrayName="license">
+              <label class="cursor-pointer label">
+                <span class="label-text mr-2 text-write font-bold">
+                  Credit
+                </span>
 
-                            <label class="cursor-pointer label">
-                                <span class="label-text text-write font-bold mr-2">
-                                    Selling images
-                                </span>
+                <input [formControlName]="0" class="checkbox" type="checkbox" />
+              </label>
 
-                                <input
-                                        type="checkbox" [formControlName]="1"
-                                        class="checkbox"
-                                />
-                            </label>
+              <label class="cursor-pointer label">
+                <span class="label-text text-write font-bold mr-2">
+                  Selling images
+                </span>
 
-                            <label class="cursor-pointer label">
-                                <span class="label-text text-write font-bold mr-2">
-                                    Generation services
-                                </span>
+                <input [formControlName]="1" class="checkbox" type="checkbox" />
+              </label>
 
-                                <input
-                                        type="checkbox" [formControlName]="2"
-                                        class="checkbox"
-                                />
-                            </label>
+              <label class="cursor-pointer label">
+                <span class="label-text text-write font-bold mr-2">
+                  Generation services
+                </span>
 
-                            <label class="cursor-pointer label">
-                                <span class="label-text text-write font-bold mr-2">
-                                    Selling model
-                                </span>
+                <input [formControlName]="2" class="checkbox" type="checkbox" />
+              </label>
 
-                                <input
-                                        type="checkbox" [formControlName]="3"
-                                        class="checkbox"
-                                />
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <!-- endregion -->
+              <label class="cursor-pointer label">
+                <span class="label-text text-write font-bold mr-2">
+                  Selling model
+                </span>
+
+                <input [formControlName]="3" class="checkbox" type="checkbox" />
+              </label>
             </div>
+          </div>
+        </div>
+        <!-- endregion -->
+      </div>
 
-            <!-- region File Models -->
-            <div class="flex flex-row space-x-4 justify-center
-                items-center my-4"
-            >
-                <!-- Upload Model -->
-                <div class="flex flex-col justify-center items-center
-                    rounded-box px-4 border-2
-                    border-primary-content/20 bg-primary/70"
-                >
-                    <p>
-                        Upload <b>model</b> file:
-                    </p>
+      <!-- region File Models -->
+      <div class="flex flex-row space-x-4 justify-center items-center my-4">
+        <!-- Upload Model -->
+        <div
+          class="flex flex-col justify-center items-center rounded-box px-4 border-2 shadow-2xl border-primary-content/20 bg-primary/70"
+        >
+          <p>Upload <b>model</b> file:</p>
 
-                    <input
-                            required
-                            type="file"
-                            (change)="onFileSelected($event)"
-                            class="file-input file-input-bordered file-input-accent
-                                w-full max-w-xs mb-4 border-2 border-success
-                                text-write hover:file-input-success"
-                            accept=".zip, .rar, .7z, .tar.gz, .tar.bz2, .tar.xz, .tar"
-                            name="modelFile"
-                    />
+          <input
+            (change)="onFileSelected($event)"
+            accept=".zip, .rar, .7z, .tar.gz, .tar.bz2, .tar.xz, .tar"
+            class="file-input file-input-bordered file-input-accent w-full max-w-xs mb-4 border-2 border-success text-write hover:file-input-success"
+            name="modelFile"
+            required
+            type="file"
+          />
 
-                    <p class="mt-0">
-                        <b>.zip, .rar, .7z, .tar.gz, .tar.bz2, .tar.xz, .tar</b>
-                    </p>
-                </div>
+          <p class="mt-0">
+            <b>.zip, .rar, .7z, .tar.gz, .tar.bz2, .tar.xz, .tar</b>
+          </p>
+        </div>
 
-                <!-- Upload Image -->
-                <div class="flex flex-col justify-center items-center
-                    rounded-box px-4 border-2
-                    border-secondary-content/20 bg-secondary/70"
-                >
-                    <p>
-                        Upload <b>image</b> preview:
-                    </p>
+        <!-- Upload Image -->
+        <div
+          class="flex flex-col justify-center items-center rounded-box px-4 border-2 shadow-2xl border-secondary-content/20 bg-secondary/70"
+        >
+          <p>Upload <b>image</b> preview:</p>
 
-                    <input
-                            required
-                            type="file"
-                            (change)="onImgSelected($event)"
-                            class="file-input file-input-bordered file-input-accent
-                                w-full max-w-xs mb-4 border-2 border-success
-                                text-write hover:file-input-success"
-                            accept=".png, .jpg, .jpeg, .webp, .svg"
-                            name="modelImg"
-                    />
+          <input
+            (change)="onImgSelected($event)"
+            accept=".png, .jpg, .jpeg, .webp, .svg"
+            class="file-input file-input-bordered file-input-accent w-full max-w-xs mb-4 border-2 border-success text-write hover:file-input-success"
+            name="modelImg"
+            required
+            type="file"
+          />
 
-                    <p class="mt-0">
-                        <b>.png, .jpg, .jpeg, .webp, .svg</b>
-                    </p>
-                </div>
-            </div>
-            <!-- endregion -->
+          <p class="mt-0">
+            <b>.png, .jpg, .jpeg, .webp, .svg</b>
+          </p>
+        </div>
+      </div>
+      <!-- endregion -->
 
-            <div class="flex flex-row justify-center items-center">
-                <button
-                        type="submit" [disabled]="!form.valid"
-                        class="btn btn-accent bg-accent font-bold text-success text-5xl
-                            border-b-2 border-success hover:text-accent
-                            hover:bg-success hover:border-accent"
-                >
-                    UPLOAD MODEL
-                </button>
-            </div>
+      <div class="flex flex-row justify-center items-center">
+        <button
+          [disabled]="!form.valid"
+          class="btn btn-accent bg-accent my-4 font-bold text-success text-4xl border-b-2 border-success hover:text-accent hover:bg-success hover:border-accent shadow-2xl"
+          type="submit"
+        >
+          UPLOAD MODEL
+        </button>
+      </div>
 
-            @if (form.invalid) {
-                <div
-                        class="flex alert alert-error mt-4
-                            text-white font-bold text-5xl
-                            justify-center items-center"
-                >
-                    <p>Invalid form data, check for any errors</p>
-                </div>
-            }
-        </form>
-    </div>
-    <!-- endregion -->
+      @if (form.invalid) {
+        <div
+          class="flex alert alert-error my-4 ml-28 text-white font-bold text-3xl py-0 px-0.5 w-9/12 justify-center text-center items-center shadow-2xl"
+        >
+          <p>Invalid form data, check for any errors</p>
+        </div>
+      }
+    </form>
+  </div>
+  <!-- endregion -->
 </div>
