@@ -1,0 +1,47 @@
+<div class="prose flex flex-col items-center max-w-full">
+  <!-- region Title -->
+  <h1 class="text-primary text-5xl mt-4 mb-2">Stable Diffusion Models</h1>
+  <h2 class="text-secondary text-3xl mt-0 mb-4">
+    All models added to the site
+  </h2>
+  <!-- endregion -->
+  <div class="flex justify-center items-center">
+    <!-- region Models -->
+    @if (formData && formData.length > 0) {
+      <div
+        class="flex flex-wrap flex-grow justify-center items-center flex-row gap-4"
+      >
+        @for (data of formData; track data.id) {
+          <div
+            class="flex flex-col text-write bg-primary border-2 border-primary-content/20 rounded-box shadow-2xl items-center justify-center w-96 mb-2"
+          >
+            <img class="w-2/3" alt="" src="assets/{{ data.img }}" />
+            <h1 class="text-primary-content/60">{{ data.name }}</h1>
+            <h3 class="text-primary-content/50">
+              {{ data.description }}
+            </h3>
+            <p><b>Author:</b> {{ data.author }}</p>
+            <p><b>Type:</b> {{ data.type }}</p>
+            <p><b>Base:</b> {{ data.base }}</p>
+            <p><b>License:</b> {{ data.license }}</p>
+            <!--            <p><b>File name:</b> {{ data.file }}</p>-->
+            <!--            <p><b>Size:</b> {{ data.file.size }}</p>-->
+            <!--            <p><b>Type:</b>{{ data.file.type }}</p>-->
+            <p>
+              <a
+                class="link no-underline text-2xl w-56 font-bold link-accent hover:text-success-content/40 text-success bg-accent p-3 rounded-box shadow-3xl border-4 border-accent-content/20 flex justify-center items-center"
+                href="assets/{{ data.file }}"
+              >
+                DOWNLOAD</a
+              >
+            </p>
+          </div>
+        } @empty {
+          <p>No models found</p>
+        }
+      </div>
+    } @else {
+      <h3>Loading...</h3>
+    }
+  </div>
+</div>

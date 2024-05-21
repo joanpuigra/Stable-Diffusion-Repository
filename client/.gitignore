@@ -130,3 +130,4 @@ docs
 .angular
 .idea
 /src/assets/License
+client/.vercel

@@ -20,9 +20,9 @@ a _repository_ it works as a **catalog** for **models** and **data**.
 - [TailwindCSS/typography](https://github.com/tailwindlabs/tailwindcss-typography)
 - [DaisyUI](https://daisyui.com/)
 - [Express](https://expressjs.com/)
+- [Mongoose](https://mongoosejs.com/)
 - [Prettier](https://prettier.io/)
-
-[//]: # (- MongoDB)
+- [Dotenv](https://www.dotenv.org/)
 
 ## License
 [MIT License](LICENSE)
