@@ -1,0 +1,6 @@
+
+.idea/workspace.xml
+node_modules/.bin/ng-xi18n 3
+node_modules/.bin/ngc 3
+node_modules/.bin/ngcc 3
+node_modules/.bin/update-browserslist-db 3
