@@ -25,7 +25,11 @@ export class ApiService {
     return this.http.get(`${this.url}/api/get`)
   }
 
-  deleteData(id: ObjectId): Observable<any> {
+  deleteModel(id: ObjectId): Observable<any> {
     return this.http.delete(`${this.url}/api/delete/${id}`)
+  }
+
+  searchModelbyName(name: string): Observable<any> {
+    return this.http.get(`${this.url}/api/get/${name}`)
   }
 }

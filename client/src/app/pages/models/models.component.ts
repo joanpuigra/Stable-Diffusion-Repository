@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core'
 import { RouterLink } from '@angular/router'
 import { NgForOf, NgIf, NgOptimizedImage } from '@angular/common'
 import { ApiService } from '../../services/api.service'
@@ -15,7 +15,10 @@ export class ModelsComponent implements OnInit {
   formData: any = []
 
   // constructor(private formDataService: FormDataService) {}
-  constructor(private ApiService: ApiService) {}
+  constructor(
+    private ApiService: ApiService,
+    private changeDetector: ChangeDetectorRef,
+  ) {}
 
   ngOnInit(): void {
     this.loadModels()
@@ -29,11 +32,26 @@ export class ModelsComponent implements OnInit {
     })
   }
 
-  deleteData = (id: ObjectId) => {
-    this.ApiService.deleteData(id).subscribe(() => {
-      console.log('Deleted model: ', id);
-      this.loadModels();
-      alert('Modelo eliminado con éxito');
-    });
+  deleteModel = (id: ObjectId) => {
+    this.ApiService.deleteModel(id).subscribe(() => {
+      console.log('Deleted model: ', id)
+      this.loadModels()
+      alert('Model deleted')
+    })
+  }
+
+  searchModel = (name: string) => {
+    this.ApiService.getData().subscribe((data) => {
+      if (name) {
+        this.formData = data.models.filter(
+          (model: { name: string }) => model.name === name,
+        )
+        console.log('Searched model: ', this.formData)
+      } else {
+        this.formData = data.models
+        console.log('All models: ', this.formData)
+      }
+      this.changeDetector.detectChanges()
+    })
   }
 }

@@ -52,13 +52,13 @@ router.get('/get', async (req, res) => {
   }
 })
 
-// @route GET /api/get/:id
-// @desc Get model by id
-router.get('/get/:id', async (req, res) => {
-  const _id = req.params.id
+// @route GET /api/get/:name
+// @desc Get model by name
+router.get('/get/:name', async (req, res) => {
+  const name = req.params.name
 
   try {
-    const existModel = await Model.findOne({_id: _id})
+    const existModel = await Model.findOne({name: name})
 
     if (!existModel) {
       return res.status(404).json({ success: false, message: 'Model not found' })
