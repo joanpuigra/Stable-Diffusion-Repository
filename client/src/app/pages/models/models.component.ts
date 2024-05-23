@@ -3,11 +3,12 @@ import { RouterLink } from '@angular/router'
 import { NgForOf, NgIf, NgOptimizedImage } from '@angular/common'
 import { ApiService } from '../../services/api.service'
 import { ObjectId } from 'mongoose'
+import { FormsModule } from '@angular/forms'
 
 @Component({
   selector: 'app-models',
   standalone: true,
-  imports: [RouterLink, NgIf, NgForOf, NgOptimizedImage],
+  imports: [RouterLink, NgIf, NgForOf, NgOptimizedImage, FormsModule],
   templateUrl: './models.component.html',
   styleUrl: './models.component.css',
 })
@@ -40,7 +41,7 @@ export class ModelsComponent implements OnInit {
     })
   }
 
-  searchModel = (name: string) => {
+  searchModel = (name: any) => {
     this.ApiService.getData().subscribe((data) => {
       if (name) {
         this.formData = data.models.filter(
@@ -52,6 +53,14 @@ export class ModelsComponent implements OnInit {
         console.log('All models: ', this.formData)
       }
       this.changeDetector.detectChanges()
+    })
+  }
+
+  editModel = (id: ObjectId, formData: any) => {
+    this.ApiService.editModel(id, formData).subscribe(() => {
+      console.log('Edited model: ', id)
+      this.loadModels()
+      alert('Model edited')
     })
   }
 }

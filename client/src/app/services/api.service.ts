@@ -32,4 +32,8 @@ export class ApiService {
   searchModelbyName(name: string): Observable<any> {
     return this.http.get(`${this.url}/api/get/${name}`)
   }
+
+  editModel(id: ObjectId, formData: modelsInterface): Observable<any> {
+    return this.http.put(`${this.url}/api/put/${id}`, formData)
+  }
 }

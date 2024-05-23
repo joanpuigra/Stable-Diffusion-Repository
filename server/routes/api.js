@@ -75,7 +75,7 @@ router.get('/get/:name', async (req, res) => {
 // @desc Update model by id
 router.put('/put/:id', async (req, res) => {
   const _id = req.params.id
-  const { description, author, type, base, license, file, img } = req.body
+  const { name, description, author, type, base, license, file, img } = req.body
 
   try {
     const existModel = await Model.findOne({_id: _id})
@@ -84,6 +84,7 @@ router.put('/put/:id', async (req, res) => {
       return res.status(404).json({ success: false, message: 'Model not found' })
     }
 
+    existModel.name = name
     existModel.description = description
     existModel.author = author
     existModel.type = type
