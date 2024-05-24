@@ -41,11 +41,14 @@ export class ModelsComponent implements OnInit {
     })
   }
 
-  searchModel = (name: any) => {
+  searchModel = (name: string) => {
+    // searchModel = (event: Event) => {
+    // const target = event.target as HTMLInputElement
+    // const name = target.value
     this.ApiService.getData().subscribe((data) => {
       if (name) {
-        this.formData = data.models.filter(
-          (model: { name: string }) => model.name === name,
+        this.formData = data.models.filter((model: { name: string }) =>
+          model.name.toLowerCase().includes(name.toLowerCase()),
         )
         console.log('Searched model: ', this.formData)
       } else {
